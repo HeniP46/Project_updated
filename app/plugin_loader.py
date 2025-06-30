@@ -26,5 +26,8 @@ def load_commands():
             except ImportError as e:
                 print(f"Warning: Could not import {module_name}: {e}")
                 continue
+            except Exception as e:
+                print(f"Warning: Error loading command from {module_name}: {e}")
+                continue
     
     return commands
