@@ -1,4 +1,3 @@
-# app/commands/multiply.py
 from decimal import Decimal
 from app.operations import multiply
 from app.command import Command
