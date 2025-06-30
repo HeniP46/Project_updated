@@ -1,5 +1,6 @@
 """Test suite for the App REPL interface."""
-
+import pytest
+from app import App
 
 
 def test_app_start_exit_command(capfd, monkeypatch):
