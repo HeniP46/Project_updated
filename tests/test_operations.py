@@ -1,17 +1,29 @@
 """
 Tests for individual operations via the Calculation class.
 """
-
 import pytest
 from decimal import Decimal
 from app.calculation import Calculation
 from app.operations import add, subtract, multiply, divide
 
 
-def test_operation(a, b, operation, expected):
+@pytest.mark.parametrize(
+    "val1, val2, op, result",
+    [
+        (Decimal("10"), Decimal("5"), add, Decimal("15")),
+        (Decimal("10"), Decimal("5"), subtract, Decimal("5")),
+        (Decimal("10"), Decimal("5"), multiply, Decimal("50")),
+        (Decimal("10"), Decimal("5"), divide, Decimal("2")),
+        (Decimal("9"), Decimal("3"), divide, Decimal("3")),
+        (Decimal("2"), Decimal("3"), add, Decimal("5")),
+        (Decimal("8"), Decimal("2"), subtract, Decimal("6")),
+        (Decimal("3"), Decimal("4"), multiply, Decimal("12")),
+    ],
+)
+def test_operation(val1, val2, op, result):
     """Test Calculation.perform with various operations."""
-    calc = Calculation.create(a, b, operation)
-    assert calc.perform() == expected
+    calc = Calculation.create(val1, val2, op)
+    assert calc.perform() == result
 
 
 def test_divide_by_zero():
