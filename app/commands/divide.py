@@ -1,4 +1,3 @@
-# app/commands/divide.py
 from decimal import Decimal
 from app.operations import divide
 from app.command import Command
