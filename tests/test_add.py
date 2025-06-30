@@ -1,4 +1,6 @@
 """Tests for app REPL commands."""
+import pytest
+from app import App
 
 
 def test_app_start_exit_command(capfd, monkeypatch):
@@ -8,6 +10,7 @@ def test_app_start_exit_command(capfd, monkeypatch):
     out, _ = capfd.readouterr()
     assert "Welcome to the calculator REPL!" in out
     assert "Exiting..." in out
+
 
 def test_app_unknown_command_then_exit(capfd, monkeypatch):
     """Test unknown command input followed by exit."""
