@@ -1,10 +1,12 @@
+te@pytest.mark.parametrize(
+    "val1,val2,operation,expected",
 from decimal import Decimal
 import pytest
 from app.calculation import Calculation
 from app.operations import add, divide
 
 @pytest.mark.parametrize(
-    "a,b,operation,expected",
+    "val1,val2,operation,expected",
     [
         (Decimal("10"), Decimal("5"), add, Decimal("15")),
         (Decimal("9"), Decimal("3"), divide, Decimal("3")),
@@ -12,8 +14,8 @@ from app.operations import add, divide
         (Decimal("6"), Decimal("2"), divide, Decimal("3")),
     ],
 )
-def test_calculation_operations(a, b, operation, expected):
-    calc = Calculation(a, b, operation)
+def test_calculation_operations(val1, val2, operation, expected):
+    calc = Calculation(val1, val2, operation)
     assert calc.perform() == expected
 
 def test_calculation_repr():
