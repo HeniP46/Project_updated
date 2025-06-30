@@ -1,7 +1,6 @@
 """
 Tests for the Calculations history class.
 """
-
 from decimal import Decimal
 import pytest
 from app.calculation import Calculation
