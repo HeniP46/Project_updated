@@ -11,6 +11,8 @@ from app.operations import add, subtract, multiply, divide
         (Decimal("9"), Decimal("3"), divide, Decimal("3")),
         (Decimal("2"), Decimal("3"), add, Decimal("5")),
         (Decimal("6"), Decimal("2"), divide, Decimal("3")),
+        (Decimal("10"), Decimal("5"), subtract, Decimal("5")),
+        (Decimal("4"), Decimal("3"), multiply, Decimal("12")),
     ],
 )
 def test_calculation_operations(val1, val2, operation, expected):
