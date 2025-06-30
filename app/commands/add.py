@@ -1,4 +1,3 @@
-# app/commands/add.py
 from decimal import Decimal
 from app.operations import add
 from app.command import Command
