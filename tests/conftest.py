@@ -32,7 +32,8 @@ def pytest_addoption(parser):
     parser.addoption("--num_records", action="store", default=5, type=int)
 
 def pytest_generate_tests(metafunc):
-    if {"a", "b", "expected"}.intersection(set(metafunc.fixturenames)):
+    # Only apply automatic parametrization to specific test functions that expect it
+    if metafunc.function.__name__ in ["test_operations_with_random_data"] and {"a", "b", "expected"}.intersection(set(metafunc.fixturenames)):
         num_records = metafunc.config.getoption("num_records")
         parameters = list(generate_test_data(num_records))
         modified = [
