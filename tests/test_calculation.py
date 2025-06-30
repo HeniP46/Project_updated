@@ -1,12 +1,10 @@
-te@pytest.mark.parametrize(
-    "val1,val2,operation,expected",
 from decimal import Decimal
 import pytest
 from app.calculation import Calculation
-from app.operations import add, divide
+from app.operations import add, subtract, multiply, divide
 
 @pytest.mark.parametrize(
-    "val1,val2,operation,expected",
+    "val1, val2, operation, expected",
     [
         (Decimal("10"), Decimal("5"), add, Decimal("15")),
         (Decimal("9"), Decimal("3"), divide, Decimal("3")),
