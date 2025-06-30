@@ -3,6 +3,7 @@ import pytest
 from app.calculation import Calculation
 from app.operations import add, subtract, multiply, divide
 
+
 @pytest.mark.parametrize(
     "val1, val2, operation, expected",
     [
@@ -16,9 +17,11 @@ def test_calculation_operations(val1, val2, operation, expected):
     calc = Calculation(val1, val2, operation)
     assert calc.perform() == expected
 
+
 def test_calculation_repr():
     calc = Calculation(Decimal("10"), Decimal("5"), add)
     assert repr(calc) == "Calculation(10, 5, add)"
+
 
 def test_divide_by_zero():
     calc = Calculation(Decimal("10"), Decimal("0"), divide)
