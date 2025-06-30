@@ -1,19 +1,16 @@
+# app/commands/add.py
 from decimal import Decimal
 from app.operations import add
+from app.command import Command
 
 
-class AddCommand:
+class AddCommand(Command):
     def __init__(self, value1: Decimal = None, value2: Decimal = None):
         self.value1 = value1
         self.value2 = value2
 
-    def name(self):
+    def name(self) -> str:
         return "add"
 
-    def execute(self, val1=None, val2=None):
-        if val1 is not None and val2 is not None:
-            return add(Decimal(str(val1)), Decimal(str(val2)))
-        elif self.value1 is not None and self.value2 is not None:
-            return add(self.value1, self.value2)
-        else:
-            raise ValueError("Values must be provided either in constructor or execute method")
+    def execute(self, a: str, b: str) -> Decimal:
+        return add(Decimal(a), Decimal(b))
