@@ -1,4 +1,3 @@
-# app/commands/subtract.py
 from decimal import Decimal
 from app.operations import subtract
 from app.command import Command
