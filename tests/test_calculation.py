@@ -5,7 +5,7 @@ from app.operations import add, subtract, multiply, divide
 
 
 @pytest.mark.parametrize(
-    "val1, val2, operation, expected",
+    "a, b, op, expected",
     [
         (Decimal("10"), Decimal("5"), add, Decimal("15")),
         (Decimal("9"), Decimal("3"), divide, Decimal("3")),
@@ -15,8 +15,8 @@ from app.operations import add, subtract, multiply, divide
         (Decimal("4"), Decimal("3"), multiply, Decimal("12")),
     ],
 )
-def test_calculation_operations(val1, val2, operation, expected):
-    calc = Calculation(val1, val2, operation)
+def test_calculation_operations(a, b, op, expected):
+    calc = Calculation(a, b, op)
     assert calc.perform() == expected
 
 
