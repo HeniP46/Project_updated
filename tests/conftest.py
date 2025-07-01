@@ -17,27 +17,24 @@ def generate_test_data(num_records):
         b = Decimal(fake.random_number(digits=2))
         operation_name = fake.random_element(elements=list(operation_mappings.keys()))
         operation_func = operation_mappings[operation_name]
-        
+
+        # Prevent zero division
         if operation_func == divide and b == 0:
             b = Decimal('1')
-        
+
         try:
             expected = operation_func(a, b)
         except ZeroDivisionError:
             expected = "ZeroDivisionError"
-        
-        yield a, b, operation_name, operation_func, expected
+
+        yield a, b, operation_func, expected
 
 def pytest_addoption(parser):
     parser.addoption("--num_records", action="store", default=5, type=int)
 
 def pytest_generate_tests(metafunc):
-    # Only apply automatic parametrization to specific test functions that expect it
-    if metafunc.function.__name__ in ["test_operations_with_random_data"] and {"a", "b", "expected"}.intersection(set(metafunc.fixturenames)):
+    # Only parametrize test functions that match expected arguments
+    if {"a", "b", "operation", "expected"}.issubset(set(metafunc.fixturenames)):
         num_records = metafunc.config.getoption("num_records")
         parameters = list(generate_test_data(num_records))
-        modified = [
-            (a, b, op_name if "operation_name" in metafunc.fixturenames else op_func, expected)
-            for a, b, op_name, op_func, expected in parameters
-        ]
-        metafunc.parametrize("a,b,operation,expected", modified)
+        metafunc.parametrize("a,b,operation,expected", parameters)
