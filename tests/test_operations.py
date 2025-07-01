@@ -8,7 +8,7 @@ from app.operations import add, subtract, multiply, divide
 
 
 @pytest.mark.parametrize(
-    "val1, val2, op, result",
+    "val1, val2, op, expected",
     [
         (Decimal("10"), Decimal("5"), add, Decimal("15")),
         (Decimal("10"), Decimal("5"), subtract, Decimal("5")),
@@ -20,14 +20,14 @@ from app.operations import add, subtract, multiply, divide
         (Decimal("3"), Decimal("4"), multiply, Decimal("12")),
     ],
 )
-def test_operation(val1, val2, op, result):
+def test_operation(val1, val2, op, expected):
     """Test Calculation.perform with various operations."""
     calc = Calculation.create(val1, val2, op)
-    assert calc.perform() == result
+    assert calc.perform() == expected
 
 
 def test_divide_by_zero():
     """Test dividing by zero raises ValueError."""
     with pytest.raises(ValueError, match="Cannot divide by zero"):
-        calc = Calculation(Decimal('10'), Decimal('0'), divide)
+        calc = Calculation(Decimal("10"), Decimal("0"), divide)
         calc.perform()
