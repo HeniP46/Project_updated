@@ -1,5 +1,5 @@
 from app.plugin_loader import load_commands
-from app import plugin_loader  # Add this line to expose plugin_loader module
+from app import plugin_loader  # needed for submodule exposure
 
 class App:
     @staticmethod
@@ -42,4 +42,5 @@ class App:
                 print(f"Error: {e}")
 
 # Make both App and plugin_loader available for import
-__all__ = ['App', 'plugin_loader']# Make calculator a package
+plugin_loader = plugin_loader
+__all__ = ['App', 'plugin_loader']
